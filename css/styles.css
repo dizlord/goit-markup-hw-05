@@ -12,6 +12,11 @@
     --footer-link-color: rgba(255, 255, 255, 0.6);
     --border-header-color: #ECECEC;
     --border-card-color: #EEEEEE;
+    --bg-cocial-color: rgba(255, 255, 255, 0.1);
+    --bg-work-overlay-color: rgba(47, 48, 58, 0.8);
+    --bg-overlay-color: rgba(0, 0, 0, 0.2);
+    --modal-btn-border-color: rgba(0, 0, 0, 0.1);
+    --bg-card-portfolio: rgba(33, 150, 243, 0.9);
 }
 
 body {
@@ -98,6 +103,7 @@ img {
     font-weight: 500;
     line-height: 1.14;
     letter-spacing: 0.02em;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-link.accent::after {
@@ -110,6 +116,7 @@ img {
     display: block;
     width: 100%;
     height: 4px;
+
     border-radius: 2px;
     background-color: var(--accent-color);
 }
@@ -170,10 +177,12 @@ img {
     align-items: center;
 
     color: currentColor;
+    box-shadow: none;
     text-decoration: none;
     font-weight: 500;
     line-height: 1.14;
     letter-spacing: 0.02em;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* class for section-titles */
@@ -191,10 +200,12 @@ img {
 .hero-container {
     padding-top: 200px;
     padding-bottom: 200px;
-    max-width: 1600px;
-    height: 600px;
     margin-left: auto;
     margin-right: auto;
+
+    max-width: 1600px;
+    height: 600px;
+
     background-image: linear-gradient(to right, rgba(47, 48, 58, 0.4), rgba(47, 48, 58, 0.4)), url("../images/index/hero-background.jpg");
     background-repeat: no-repeat;
     background-position: center;
@@ -208,6 +219,8 @@ img {
     margin-left: auto;
     margin-right: auto;
 
+    max-width: 696px;
+
     color: var(--primary-bg-color);
     font-weight: 900;
     font-size: 44px;
@@ -215,12 +228,12 @@ img {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     text-align: center;
-    max-width: 696px;
 }
 
 /* Hero btn */
 .hero-button {
     padding: 10px 32px;
+
     min-width: 200px;
 
     background-color: var(--accent-color);
@@ -234,6 +247,7 @@ img {
     border-radius: 4px;
     border-style: none;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Effects hover and focus for hero btn */
@@ -272,8 +286,9 @@ img {
 
     margin-bottom: 30px;
 
-    background-color: var(--team-bg-color);
     height: 120px;
+
+    background-color: var(--team-bg-color);
     border-radius: 4px;
 }
 
@@ -332,7 +347,8 @@ img {
 
     width: 100%;
     height: 70px;
-    background: rgba(47, 48, 58, 0.8);
+
+    background: var(--bg-work-overlay-color);
 }
 
 .work-text {
@@ -409,10 +425,13 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
+
     width: 44px;
     height: 44px;
+
     border-radius: 50%;
     color: var(--primary-icons-color);
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1), background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .icon-team {
@@ -441,11 +460,14 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
+
     width: 170px;
     height: 92px;
+    
     border: 1px solid var(--primary-icons-color);
     border-radius: 4px;
     color: var(--primary-icons-color);
+    transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1), color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .clients-link:hover, .clients-link:focus {
@@ -496,6 +518,7 @@ img {
     color: var(--primary-bg-color);
     font-style: normal;
     text-decoration: none;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* styles for links in footer */
@@ -507,6 +530,7 @@ img {
     font-size: 14px;
     line-height: 1.71;
     letter-spacing: 0.03em;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* margin for footer */
@@ -543,15 +567,67 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
+
     width: 44px;
     height: 44px;
+
     border-radius: 50%;
     color: var(--primary-bg-color);
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--bg-cocial-color);
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .cocial-link:hover, .cocial-link:focus {
     background-color: var(--accent-color);
+}
+
+/* Backdrop window */
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--bg-overlay-color);
+}
+
+.backdrop.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Modal window */
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 8px;
+
+    min-width: 528px;
+    min-height: 521px;
+
+    background-color: var(--primary-bg-color);
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Button close in modal window */
+.modal-btn {
+    display: flex;
+    margin-left: auto;
+    justify-content: center;
+    align-items: center;
+
+    width: 30px;
+    height: 30px;
+
+    background-color: var(--primary-bg-color);
+    border: 1px solid var(--modal-btn-border-color);
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 /* Portfolio */
@@ -583,6 +659,8 @@ img {
     cursor: pointer;
     border-radius: 4px;
     border-style: none;
+    box-shadow: none;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* styles for hover and focus for button in portfolio */
@@ -604,6 +682,8 @@ img {
 /* link for card */
 .portfolio-link {
     text-decoration: none;
+    box-shadow: none;
+    transition: box-shadow 5000ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .portfolio-link:hover, .portfolio-link:focus {
@@ -611,6 +691,7 @@ img {
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12),
             0px 4px 4px rgba(0, 0, 0, 0.06),
             1px 4px 6px rgba(0, 0, 0, 0.16);
+    transition: box-shadow 5000ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* style for title of portfolio */
@@ -661,4 +742,45 @@ img {
     border-left: 1px solid var(--border-card-color);
 }
 
-/* TODO: 1) snipets как работает (чтобы автоматически задавать для тега svg развертку) */
+.card-tumb {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 63px 24px;
+
+    width: 100%;
+    height: 100%;
+
+    background: var(--bg-card-portfolio);
+    transform: translateY(100%);
+    transition: transform 5000ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-paragraph {
+    margin: 0;
+    padding: 0;
+
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.56;
+    letter-spacing: 0.03em;
+    color: var(--primary-bg-color);
+
+    opacity: 0;
+    transition: opacity 5000ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-link:hover .card-overlay,
+.portfolio-link:focus .card-overlay {
+    transform: translateY(0);
+}
+
+.portfolio-link:hover .card-paragraph,
+.portfolio-link:focus .card-paragraph {
+    opacity: 1;
+}
