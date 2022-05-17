@@ -642,6 +642,7 @@ img {
     border: 1px solid var(--modal-btn-border-color);
     border-radius: 50%;
     cursor: pointer;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Portfolio */
@@ -796,4 +797,19 @@ img {
 .portfolio-link:hover .card-paragraph,
 .portfolio-link:focus .card-paragraph {
     opacity: 1;
+}
+
+.modal-icon {
+    transform: rotate(0deg);
+    color: currentColor;
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1), fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-btn:hover {
+    background-color: var(--accent-hero-color);
+}
+
+.modal-btn:hover .modal-icon{
+    transform: rotate(360deg);
+    fill: var(--primary-bg-color);
 }
